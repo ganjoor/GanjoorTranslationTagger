@@ -58,5 +58,16 @@ namespace GanjoorTranslationTagger
             Cursor = Cursors.Default;
             DialogResult = DialogResult.OK;
         }
+
+        private void btnSelectCategory_Click(object sender, EventArgs e)
+        {
+            using(SelectPoet poetsDialog = new SelectPoet())
+            {
+                if(poetsDialog.ShowDialog(this) == DialogResult.OK)
+                {
+
+                }
+            }
+        }
     }
 }

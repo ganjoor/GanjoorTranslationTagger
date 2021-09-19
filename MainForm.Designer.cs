@@ -115,6 +115,7 @@ namespace GanjoorTranslationTagger
             this.btnSelectCategory.TabIndex = 12;
             this.btnSelectCategory.Text = "انتخاب بخش";
             this.btnSelectCategory.UseVisualStyleBackColor = true;
+            this.btnSelectCategory.Click += new System.EventHandler(this.btnSelectCategory_Click);
             // 
             // MainForm
             // 
