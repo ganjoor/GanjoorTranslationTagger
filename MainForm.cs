@@ -15,7 +15,6 @@ namespace GanjoorTranslationTagger
             InitializeComponent();
 
             txtEmail.Text = Properties.Settings.Default.Email;
-            txtPassword.Text = Properties.Settings.Default.Password;
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -49,7 +48,6 @@ namespace GanjoorTranslationTagger
 
                 var result = JObject.Parse(await response.Content.ReadAsStringAsync());
                 Properties.Settings.Default.Email = txtEmail.Text;
-                Properties.Settings.Default.Password = txtPassword.Text;
                 Properties.Settings.Default.MuseumToken = result["token"].ToString();
                 Properties.Settings.Default.SessionId = Guid.Parse(result["sessionId"].ToString());
                 Properties.Settings.Default.UserId = Guid.Parse(result["user"]["id"].ToString());

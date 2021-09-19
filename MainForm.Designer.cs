@@ -35,6 +35,7 @@ namespace GanjoorTranslationTagger
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
+            this.btnSelectCategory = new System.Windows.Forms.Button();
             this.grpLogin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,11 +105,23 @@ namespace GanjoorTranslationTagger
             this.lblPassword.TabIndex = 7;
             this.lblPassword.Text = "گذرواژه:";
             // 
+            // btnSelectCategory
+            // 
+            this.btnSelectCategory.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSelectCategory.Location = new System.Drawing.Point(27, 236);
+            this.btnSelectCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSelectCategory.Name = "btnSelectCategory";
+            this.btnSelectCategory.Size = new System.Drawing.Size(500, 34);
+            this.btnSelectCategory.TabIndex = 12;
+            this.btnSelectCategory.Text = "انتخاب بخش";
+            this.btnSelectCategory.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1084, 766);
+            this.Controls.Add(this.btnSelectCategory);
             this.Controls.Add(this.grpLogin);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Name = "MainForm";
@@ -129,6 +142,7 @@ namespace GanjoorTranslationTagger
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Button btnSelectCategory;
     }
 }
 
