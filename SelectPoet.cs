@@ -21,6 +21,8 @@ namespace GanjoorTranslationTagger
             InitializeComponent();
         }
 
+        public GanjoorPoetViewModel SelectedPoet { get; set; }
+
         private async void SelectPoet_Load(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
@@ -40,6 +42,17 @@ namespace GanjoorTranslationTagger
                 lst.DataSource = JArray.Parse(await response.Content.ReadAsStringAsync()).ToObject<List<GanjoorPoetViewModel>>();
             }
             Cursor = Cursors.Default;
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if(lst.SelectedItem == null)
+            {
+                MessageBox.Show("لطفا شاعر مد نظر را انتخاب کنید.");
+                DialogResult = DialogResult.None;
+                return;
+            }
+            SelectedPoet = lst.SelectedItem as GanjoorPoetViewModel;
         }
     }
 }

@@ -65,7 +65,7 @@ namespace GanjoorTranslationTagger
             {
                 if(poetsDialog.ShowDialog(this) == DialogResult.OK)
                 {
-
+                    MessageBox.Show(poetsDialog.SelectedPoet.ToString());
                 }
             }
         }
