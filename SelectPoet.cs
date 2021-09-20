@@ -54,5 +54,14 @@ namespace GanjoorTranslationTagger
             }
             SelectedPoet = lst.SelectedItem as GanjoorPoetViewModel;
         }
+
+        private void lst_DoubleClick(object sender, EventArgs e)
+        {
+            if (lst.SelectedItem != null)
+            {
+                SelectedPoet = lst.SelectedItem as GanjoorPoetViewModel;
+                DialogResult = DialogResult.OK;
+            }
+        }
     }
 }

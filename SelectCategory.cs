@@ -1,0 +1,79 @@
+﻿using Newtonsoft.Json.Linq;
+using RMuseum.Models.Ganjoor.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace GanjoorTranslationTagger
+{
+    public partial class SelectCategory : Form
+    {
+        public SelectCategory(GanjoorPoetViewModel poet = null)
+        {
+            InitializeComponent();
+
+            Poet = poet;
+        }
+
+        public GanjoorPoetViewModel Poet { private get; set; }
+
+        private async void SelectCategory_Load(object sender, EventArgs e)
+        {
+            if (Poet == null)
+                return;
+            Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var catsApiUrl = $"https://ganjgah.ir/api/ganjoor/cat/{Poet.RootCatId}?poems=false";
+                var response = await httpClient.GetAsync(catsApiUrl);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    Cursor = Cursors.Default;
+                    Enabled = true;
+                    MessageBox.Show(response.ToString());
+                    return;
+                }
+                response.EnsureSuccessStatusCode();
+
+
+                var cat = JObject.Parse(await response.Content.ReadAsStringAsync()).ToObject<GanjoorPoetCompleteViewModel>();  
+
+                foreach (var child in cat.Cat.Children)
+                {
+                    var node = tree.Nodes.Add(child.Title);
+                    node.Tag = child;
+                    await FindNodeChildren(node, httpClient, child);
+                }
+
+            }
+            Cursor = Cursors.Default;
+        }
+
+        private async Task FindNodeChildren(TreeNode node, HttpClient httpClient, GanjoorCatViewModel parent)
+        {
+            var catsApiUrl = $"https://ganjgah.ir/api/ganjoor/cat/{parent.Id}?poems=false";
+            var response = await httpClient.GetAsync(catsApiUrl);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                Cursor = Cursors.Default;
+                Enabled = true;
+                MessageBox.Show(response.ToString());
+                return;
+            }
+            response.EnsureSuccessStatusCode();
+
+
+            var cat = JObject.Parse(await response.Content.ReadAsStringAsync()).ToObject<GanjoorPoetCompleteViewModel>();
+            foreach (var child in cat.Cat.Children)
+            {
+                var childNode = node.Nodes.Add(child.Title);
+                childNode.Tag = child;
+                await FindNodeChildren(childNode, httpClient, child);
+            }
+        }
+    }
+}
