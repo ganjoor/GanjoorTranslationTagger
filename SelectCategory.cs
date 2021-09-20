@@ -40,12 +40,15 @@ namespace GanjoorTranslationTagger
                 response.EnsureSuccessStatusCode();
 
 
-                var cat = JObject.Parse(await response.Content.ReadAsStringAsync()).ToObject<GanjoorPoetCompleteViewModel>();  
+                var cat = JObject.Parse(await response.Content.ReadAsStringAsync()).ToObject<GanjoorPoetCompleteViewModel>();
+
+                
 
                 foreach (var child in cat.Cat.Children)
                 {
                     var node = tree.Nodes.Add(child.Title);
                     node.Tag = child;
+                    child.Ancestors = new GanjoorCatViewModel[] { cat.Cat };
                     await FindNodeChildren(node, httpClient, child);
                 }
 
@@ -68,12 +71,38 @@ namespace GanjoorTranslationTagger
 
 
             var cat = JObject.Parse(await response.Content.ReadAsStringAsync()).ToObject<GanjoorPoetCompleteViewModel>();
+            var ancestors = new List<GanjoorCatViewModel>(parent.Ancestors);
+            ancestors.Add(parent);
             foreach (var child in cat.Cat.Children)
             {
                 var childNode = node.Nodes.Add(child.Title);
                 childNode.Tag = child;
+                child.Ancestors = ancestors.ToArray();
                 await FindNodeChildren(childNode, httpClient, child);
             }
+        }
+
+        public GanjoorCatViewModel SelectedCat { get; set; }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (tree.SelectedNode == null)
+            {
+                MessageBox.Show("لطفا بخش مد نظر را انتخاب کنید.");
+                DialogResult = DialogResult.None;
+                return;
+            }
+            SelectedCat = tree.SelectedNode.Tag as GanjoorCatViewModel;
+        }
+
+        private void tree_DoubleClick(object sender, EventArgs e)
+        {
+            if (tree.SelectedNode != null)
+            {
+                SelectedCat = tree.SelectedNode.Tag as GanjoorCatViewModel;
+                DialogResult = DialogResult.OK;
+            }
+            
         }
     }
 }

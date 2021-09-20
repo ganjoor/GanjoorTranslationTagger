@@ -36,6 +36,7 @@ namespace GanjoorTranslationTagger
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.btnSelectCategory = new System.Windows.Forms.Button();
+            this.lblSelectedCat = new System.Windows.Forms.Label();
             this.grpLogin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,11 +118,21 @@ namespace GanjoorTranslationTagger
             this.btnSelectCategory.UseVisualStyleBackColor = true;
             this.btnSelectCategory.Click += new System.EventHandler(this.btnSelectCategory_Click);
             // 
+            // lblSelectedCat
+            // 
+            this.lblSelectedCat.AutoSize = true;
+            this.lblSelectedCat.Location = new System.Drawing.Point(32, 286);
+            this.lblSelectedCat.Name = "lblSelectedCat";
+            this.lblSelectedCat.Size = new System.Drawing.Size(131, 19);
+            this.lblSelectedCat.TabIndex = 13;
+            this.lblSelectedCat.Text = "بخش انتخاب شده";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1084, 766);
+            this.Controls.Add(this.lblSelectedCat);
             this.Controls.Add(this.btnSelectCategory);
             this.Controls.Add(this.grpLogin);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
@@ -132,6 +143,7 @@ namespace GanjoorTranslationTagger
             this.grpLogin.ResumeLayout(false);
             this.grpLogin.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -144,6 +156,7 @@ namespace GanjoorTranslationTagger
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnSelectCategory;
+        private System.Windows.Forms.Label lblSelectedCat;
     }
 }
 

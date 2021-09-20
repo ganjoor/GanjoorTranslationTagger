@@ -55,6 +55,7 @@ namespace GanjoorTranslationTagger
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "تأیید";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // panel1
             // 
@@ -74,6 +75,7 @@ namespace GanjoorTranslationTagger
             this.tree.RightToLeftLayout = true;
             this.tree.Size = new System.Drawing.Size(541, 421);
             this.tree.TabIndex = 6;
+            this.tree.DoubleClick += new System.EventHandler(this.tree_DoubleClick);
             // 
             // SelectCategory
             // 

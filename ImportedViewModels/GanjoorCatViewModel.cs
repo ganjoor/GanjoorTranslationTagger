@@ -54,7 +54,13 @@ namespace RMuseum.Models.Ganjoor.ViewModels
 
         public override string ToString()
         {
-            return Title;
+            string s = "";
+            foreach(var cat in Ancestors)
+            {
+                s += (cat.Title + " » ");
+            }
+            s += Title;
+            return s;
         }
 
 

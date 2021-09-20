@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RMuseum.Models.Ganjoor.ViewModels;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -68,10 +69,13 @@ namespace GanjoorTranslationTagger
                     using(SelectCategory dlg = new SelectCategory(poetsDialog.SelectedPoet))
                         if(dlg.ShowDialog(this) == DialogResult.OK)
                         {
-
+                            _selectedCat = dlg.SelectedCat;
+                            lblSelectedCat.Text = _selectedCat.ToString();
                         }
                 }
             }
         }
+
+        private GanjoorCatViewModel _selectedCat = null;
     }
 }
