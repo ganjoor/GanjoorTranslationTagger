@@ -30,6 +30,7 @@ namespace GanjoorTranslationTagger
         private void InitializeComponent()
         {
             this.grpLogin = new System.Windows.Forms.GroupBox();
+            this.lblLoginStatus = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -37,11 +38,12 @@ namespace GanjoorTranslationTagger
             this.lblPassword = new System.Windows.Forms.Label();
             this.btnSelectCategory = new System.Windows.Forms.Button();
             this.lblSelectedCat = new System.Windows.Forms.Label();
-            this.lblLoginStatus = new System.Windows.Forms.Label();
             this.grpCat = new System.Windows.Forms.GroupBox();
             this.grpLanguage = new System.Windows.Forms.GroupBox();
-            this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.btnLanguages = new System.Windows.Forms.Button();
+            this.cmbLanguage = new System.Windows.Forms.ComboBox();
+            this.btnStartTranslating = new System.Windows.Forms.Button();
+            this.prgrss = new System.Windows.Forms.ProgressBar();
             this.grpLogin.SuspendLayout();
             this.grpCat.SuspendLayout();
             this.grpLanguage.SuspendLayout();
@@ -62,6 +64,16 @@ namespace GanjoorTranslationTagger
             this.grpLogin.TabIndex = 11;
             this.grpLogin.TabStop = false;
             this.grpLogin.Text = "ورود";
+            // 
+            // lblLoginStatus
+            // 
+            this.lblLoginStatus.AutoSize = true;
+            this.lblLoginStatus.Location = new System.Drawing.Point(272, 166);
+            this.lblLoginStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLoginStatus.Name = "lblLoginStatus";
+            this.lblLoginStatus.Size = new System.Drawing.Size(174, 19);
+            this.lblLoginStatus.TabIndex = 10;
+            this.lblLoginStatus.Text = "لطفاً وارد سیستم شوید.";
             // 
             // lblEmail
             // 
@@ -135,16 +147,6 @@ namespace GanjoorTranslationTagger
             this.lblSelectedCat.TabIndex = 13;
             this.lblSelectedCat.Text = "بخش انتخاب شده";
             // 
-            // lblLoginStatus
-            // 
-            this.lblLoginStatus.AutoSize = true;
-            this.lblLoginStatus.Location = new System.Drawing.Point(272, 166);
-            this.lblLoginStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLoginStatus.Name = "lblLoginStatus";
-            this.lblLoginStatus.Size = new System.Drawing.Size(174, 19);
-            this.lblLoginStatus.TabIndex = 10;
-            this.lblLoginStatus.Text = "لطفاً وارد سیستم شوید.";
-            // 
             // grpCat
             // 
             this.grpCat.Controls.Add(this.btnSelectCategory);
@@ -169,15 +171,6 @@ namespace GanjoorTranslationTagger
             this.grpLanguage.TabStop = false;
             this.grpLanguage.Text = "زبان یا نویسش";
             // 
-            // cmbLanguage
-            // 
-            this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLanguage.FormattingEnabled = true;
-            this.cmbLanguage.Location = new System.Drawing.Point(138, 37);
-            this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(393, 27);
-            this.cmbLanguage.TabIndex = 16;
-            // 
             // btnLanguages
             // 
             this.btnLanguages.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -190,11 +183,41 @@ namespace GanjoorTranslationTagger
             this.btnLanguages.UseVisualStyleBackColor = true;
             this.btnLanguages.Click += new System.EventHandler(this.btnLanguages_Click);
             // 
+            // cmbLanguage
+            // 
+            this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLanguage.FormattingEnabled = true;
+            this.cmbLanguage.Location = new System.Drawing.Point(138, 37);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(393, 27);
+            this.cmbLanguage.TabIndex = 16;
+            // 
+            // btnStartTranslating
+            // 
+            this.btnStartTranslating.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnStartTranslating.Location = new System.Drawing.Point(32, 263);
+            this.btnStartTranslating.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStartTranslating.Name = "btnStartTranslating";
+            this.btnStartTranslating.Size = new System.Drawing.Size(252, 35);
+            this.btnStartTranslating.TabIndex = 18;
+            this.btnStartTranslating.Text = "شروع";
+            this.btnStartTranslating.UseVisualStyleBackColor = true;
+            this.btnStartTranslating.Click += new System.EventHandler(this.btnStartTranslating_Click);
+            // 
+            // prgrss
+            // 
+            this.prgrss.Location = new System.Drawing.Point(302, 263);
+            this.prgrss.Name = "prgrss";
+            this.prgrss.Size = new System.Drawing.Size(798, 35);
+            this.prgrss.TabIndex = 19;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1112, 766);
+            this.ClientSize = new System.Drawing.Size(1112, 325);
+            this.Controls.Add(this.prgrss);
+            this.Controls.Add(this.btnStartTranslating);
             this.Controls.Add(this.grpLanguage);
             this.Controls.Add(this.grpCat);
             this.Controls.Add(this.grpLogin);
@@ -228,6 +251,8 @@ namespace GanjoorTranslationTagger
         private System.Windows.Forms.GroupBox grpLanguage;
         private System.Windows.Forms.Button btnLanguages;
         private System.Windows.Forms.ComboBox cmbLanguage;
+        private System.Windows.Forms.Button btnStartTranslating;
+        private System.Windows.Forms.ProgressBar prgrss;
     }
 }
 

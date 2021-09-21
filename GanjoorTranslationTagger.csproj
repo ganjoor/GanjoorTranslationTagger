@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GPersianTextSync.cs" />
     <Compile Include="ImportedViewModels\GanjoorCatViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorLanguage.cs" />
     <Compile Include="ImportedViewModels\GanjoorPoemSummaryViewModel.cs" />

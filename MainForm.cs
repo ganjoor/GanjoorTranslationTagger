@@ -109,6 +109,24 @@ namespace GanjoorTranslationTagger
 
         private GanjoorCatViewModel _selectedCat = null;
 
-        
+        private void btnStartTranslating_Click(object sender, EventArgs e)
+        {
+            if(_selectedCat == null)
+            {
+                MessageBox.Show("لطفاً بخش مد نظر را انتخاب کنید.");
+                return;
+            }
+
+            if(cmbLanguage.SelectedItem == null)
+            {
+                MessageBox.Show("لطفاً زبان مد نظر را انتخاب کنید.");
+                return;
+            }
+
+            if(MessageBox.Show($"آیا از برگردان {_selectedCat} به {cmbLanguage.SelectedItem} اطمینان دارید؟", "تأییدیه", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+        }
     }
 }
