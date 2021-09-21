@@ -203,6 +203,7 @@ namespace GanjoorTranslationTagger
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "نویسشگر ماشینی گنجور";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.grpLogin.ResumeLayout(false);
             this.grpLogin.PerformLayout();
             this.grpCat.ResumeLayout(false);

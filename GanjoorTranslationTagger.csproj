@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImportedViewModels\GanjoorCatViewModel.cs" />
+    <Compile Include="ImportedViewModels\GanjoorLanguage.cs" />
     <Compile Include="ImportedViewModels\GanjoorPoemSummaryViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorPoetCompleteViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorPoetViewModel.cs" />

@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RMuseum.Models.Ganjoor;
 using RMuseum.Models.Ganjoor.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
@@ -19,6 +21,27 @@ namespace GanjoorTranslationTagger
             txtEmail.Text = Properties.Settings.Default.Email;
             if (!string.IsNullOrEmpty(Properties.Settings.Default.MuseumToken))
                 lblLoginStatus.Text = "شما وارد سیستم شده‌اید!";
+        }
+
+        private async void MainForm_Load(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var languagesApiUrl = "https://ganjgah.ir/api/translations/languages";
+                var response = await httpClient.GetAsync(languagesApiUrl);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    Cursor = Cursors.Default;
+                    Enabled = true;
+                    MessageBox.Show(response.ToString());
+                    return;
+                }
+                response.EnsureSuccessStatusCode();
+                cmbLanguage.DataSource = JArray.Parse(await response.Content.ReadAsStringAsync()).ToObject<List<GanjoorLanguage>>();
+            }
+            Cursor = Cursors.Default;
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
