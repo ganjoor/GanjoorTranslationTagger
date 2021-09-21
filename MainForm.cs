@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using RMuseum.Models.Ganjoor.ViewModels;
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -16,6 +17,8 @@ namespace GanjoorTranslationTagger
             InitializeComponent();
 
             txtEmail.Text = Properties.Settings.Default.Email;
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.MuseumToken))
+                lblLoginStatus.Text = "شما وارد سیستم شده‌اید!";
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -60,6 +63,11 @@ namespace GanjoorTranslationTagger
             DialogResult = DialogResult.OK;
         }
 
+        private void btnLanguages_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://ganjoor.net/User/Languages");
+        }
+
         private void btnSelectCategory_Click(object sender, EventArgs e)
         {
             using(SelectPoet poetsDialog = new SelectPoet())
@@ -77,5 +85,7 @@ namespace GanjoorTranslationTagger
         }
 
         private GanjoorCatViewModel _selectedCat = null;
+
+        
     }
 }
