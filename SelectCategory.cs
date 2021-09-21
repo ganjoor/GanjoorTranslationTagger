@@ -34,7 +34,7 @@ namespace GanjoorTranslationTagger
                 {
                     Cursor = Cursors.Default;
                     Enabled = true;
-                    MessageBox.Show(response.ToString());
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
                     return;
                 }
                 response.EnsureSuccessStatusCode();
@@ -64,7 +64,7 @@ namespace GanjoorTranslationTagger
             {
                 Cursor = Cursors.Default;
                 Enabled = true;
-                MessageBox.Show(response.ToString());
+                MessageBox.Show(await response.Content.ReadAsStringAsync());
                 return;
             }
             response.EnsureSuccessStatusCode();

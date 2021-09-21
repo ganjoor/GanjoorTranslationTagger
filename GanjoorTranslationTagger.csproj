@@ -52,12 +52,15 @@
     <Compile Include="GPersianTextSync.cs" />
     <Compile Include="ImportedViewModels\GanjoorCatViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorLanguage.cs" />
+    <Compile Include="ImportedViewModels\GanjoorPoemCompleteViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorPoemSummaryViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorPoetCompleteViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorPoetViewModel.cs" />
+    <Compile Include="ImportedViewModels\GanjoorVerseViewModel.cs" />
     <Compile Include="ImportedViewModels\LoginViewModel.cs" />
     <Compile Include="ImportedViewModels\PublicRAppUser.cs" />
     <Compile Include="ImportedViewModels\RAppUserStatus.cs" />
+    <Compile Include="ImportedViewModels\VersePosition.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -35,7 +35,7 @@ namespace GanjoorTranslationTagger
                 {
                     Cursor = Cursors.Default;
                     Enabled = true;
-                    MessageBox.Show(response.ToString());
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
                     return;
                 }
                 response.EnsureSuccessStatusCode();
@@ -68,7 +68,7 @@ namespace GanjoorTranslationTagger
                 {
                     Cursor = Cursors.Default;
                     Enabled = true;
-                    MessageBox.Show(response.ToString());
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
                     return;
                 }
                 response.EnsureSuccessStatusCode();
@@ -109,7 +109,7 @@ namespace GanjoorTranslationTagger
 
         private GanjoorCatViewModel _selectedCat = null;
 
-        private void btnStartTranslating_Click(object sender, EventArgs e)
+        private async void btnStartTranslating_Click(object sender, EventArgs e)
         {
             if(_selectedCat == null)
             {
@@ -127,6 +127,46 @@ namespace GanjoorTranslationTagger
             {
                 return;
             }
+
+            Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var catsApiUrl = $"https://ganjgah.ir/api/ganjoor/cat/{_selectedCat.Id}?poems=true";
+                var response = await httpClient.GetAsync(catsApiUrl);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    Cursor = Cursors.Default;
+                    Enabled = true;
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                    return;
+                }
+                response.EnsureSuccessStatusCode();
+
+
+                var catWithListOfPoems = JObject.Parse(await response.Content.ReadAsStringAsync()).ToObject<GanjoorPoetCompleteViewModel>();
+
+                foreach(var poem in catWithListOfPoems.Cat.Poems)
+                {
+                    var responsePoem = await httpClient.GetAsync($"https://ganjgah.ir/api/ganjoor/poem/{poem.Id}?verseDetails=true&catInfo=true&rhymes=false&recitations=false&images=false&songs=false&comments=false&navigation=true");
+                    if (!responsePoem.IsSuccessStatusCode)
+                    {
+                        Cursor = Cursors.Default;
+                        Enabled = true;
+                        MessageBox.Show(await response.Content.ReadAsStringAsync());
+                        return;
+                    }
+
+                    responsePoem.EnsureSuccessStatusCode();
+
+                    var poemWithVerses = JsonConvert.DeserializeObject<GanjoorPoemCompleteViewModel>(await responsePoem.Content.ReadAsStringAsync());
+
+                    lblLoginStatus.Text = poemWithVerses.Verses[0].Text;
+                }
+                
+
+            }
+            Cursor = Cursors.Default;
         }
     }
 }
