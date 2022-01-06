@@ -31,7 +31,7 @@ namespace GanjoorTranslationTagger
             Application.DoEvents();
             using (HttpClient httpClient = new HttpClient())
             {
-                var languagesApiUrl = "https://ganjgah.ir/api/translations/languages";
+                var languagesApiUrl = "https://api.ganjoor.net/api/translations/languages";
                 var response = await httpClient.GetAsync(languagesApiUrl);
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
@@ -64,7 +64,7 @@ namespace GanjoorTranslationTagger
             using (HttpClient httpClient = new HttpClient())
             {
                 var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                var loginUrl = "https://ganjgah.ir/api/users/login";
+                var loginUrl = "https://api.ganjoor.net/api/users/login";
                 var response = await httpClient.PostAsync(loginUrl, stringContent);
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
@@ -144,7 +144,7 @@ namespace GanjoorTranslationTagger
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Properties.Settings.Default.MuseumToken);
 
-                var catsApiUrl = $"https://ganjgah.ir/api/ganjoor/cat/{_selectedCat.Id}?poems=true";
+                var catsApiUrl = $"https://api.ganjoor.net/api/ganjoor/cat/{_selectedCat.Id}?poems=true";
                 var response = await httpClient.GetAsync(catsApiUrl);
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
@@ -160,7 +160,7 @@ namespace GanjoorTranslationTagger
 
                 foreach(var poem in catWithListOfPoems.Cat.Poems)
                 {
-                    var responsePoem = await httpClient.GetAsync($"https://ganjgah.ir/api/ganjoor/poem/{poem.Id}?verseDetails=true&catInfo=true&rhymes=false&recitations=false&images=false&songs=false&comments=false&navigation=true");
+                    var responsePoem = await httpClient.GetAsync($"https://api.ganjoor.net/api/ganjoor/poem/{poem.Id}?verseDetails=true&catInfo=true&rhymes=false&recitations=false&images=false&songs=false&comments=false&navigation=true");
                     if (!responsePoem.IsSuccessStatusCode)
                     {
                         Cursor = Cursors.Default;
@@ -196,7 +196,7 @@ namespace GanjoorTranslationTagger
                         TranslatedVerses = verses.ToArray()
                     };
 
-                    HttpResponseMessage responseTranslation = await httpClient.PostAsync($"https://ganjgah.ir/api/translations",
+                    HttpResponseMessage responseTranslation = await httpClient.PostAsync($"https://api.ganjoor.net/api/translations",
                         new StringContent(JsonConvert.SerializeObject(translation),
                         Encoding.UTF8,
                         "application/json"));

@@ -28,7 +28,7 @@ namespace GanjoorTranslationTagger
             Application.DoEvents();
             using (HttpClient httpClient = new HttpClient())
             {
-                var catsApiUrl = $"https://ganjgah.ir/api/ganjoor/cat/{Poet.RootCatId}?poems=false";
+                var catsApiUrl = $"https://api.ganjoor.net/api/ganjoor/cat/{Poet.RootCatId}?poems=false";
                 var response = await httpClient.GetAsync(catsApiUrl);
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
@@ -58,7 +58,7 @@ namespace GanjoorTranslationTagger
 
         private async Task FindNodeChildren(TreeNode node, HttpClient httpClient, GanjoorCatViewModel parent)
         {
-            var catsApiUrl = $"https://ganjgah.ir/api/ganjoor/cat/{parent.Id}?poems=false";
+            var catsApiUrl = $"https://api.ganjoor.net/api/ganjoor/cat/{parent.Id}?poems=false";
             var response = await httpClient.GetAsync(catsApiUrl);
             if (response.StatusCode != HttpStatusCode.OK)
             {

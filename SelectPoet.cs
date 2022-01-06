@@ -29,7 +29,7 @@ namespace GanjoorTranslationTagger
             Application.DoEvents();
             using (HttpClient httpClient = new HttpClient())
             {
-                var poetsApiUrl = "https://ganjgah.ir/api/ganjoor/poets";
+                var poetsApiUrl = "https://api.ganjoor.net/api/ganjoor/poets";
                 var response = await httpClient.GetAsync(poetsApiUrl);
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
