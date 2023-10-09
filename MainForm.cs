@@ -42,6 +42,7 @@ namespace GanjoorTranslationTagger
                 }
                 response.EnsureSuccessStatusCode();
                 cmbLanguage.DataSource = JArray.Parse(await response.Content.ReadAsStringAsync()).ToObject<List<GanjoorLanguage>>();
+                cmbLanguage.SelectedIndex = cmbLanguage.Items.Count - 1;
             }
             Cursor = Cursors.Default;
         }

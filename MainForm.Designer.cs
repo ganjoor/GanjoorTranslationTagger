@@ -44,6 +44,7 @@ namespace GanjoorTranslationTagger
             this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.btnStartTranslating = new System.Windows.Forms.Button();
             this.prgrss = new System.Windows.Forms.ProgressBar();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.grpLogin.SuspendLayout();
             this.grpCat.SuspendLayout();
             this.grpLanguage.SuspendLayout();
@@ -57,10 +58,12 @@ namespace GanjoorTranslationTagger
             this.grpLogin.Controls.Add(this.txtEmail);
             this.grpLogin.Controls.Add(this.txtPassword);
             this.grpLogin.Controls.Add(this.lblPassword);
-            this.grpLogin.Location = new System.Drawing.Point(27, 27);
+            this.grpLogin.Location = new System.Drawing.Point(36, 36);
+            this.grpLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpLogin.Name = "grpLogin";
+            this.grpLogin.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpLogin.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.grpLogin.Size = new System.Drawing.Size(500, 215);
+            this.grpLogin.Size = new System.Drawing.Size(667, 287);
             this.grpLogin.TabIndex = 11;
             this.grpLogin.TabStop = false;
             this.grpLogin.Text = "ورود";
@@ -68,30 +71,30 @@ namespace GanjoorTranslationTagger
             // lblLoginStatus
             // 
             this.lblLoginStatus.AutoSize = true;
-            this.lblLoginStatus.Location = new System.Drawing.Point(272, 166);
-            this.lblLoginStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLoginStatus.Location = new System.Drawing.Point(363, 221);
+            this.lblLoginStatus.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblLoginStatus.Name = "lblLoginStatus";
-            this.lblLoginStatus.Size = new System.Drawing.Size(174, 19);
+            this.lblLoginStatus.Size = new System.Drawing.Size(237, 27);
             this.lblLoginStatus.TabIndex = 10;
             this.lblLoginStatus.Text = "لطفاً وارد سیستم شوید.";
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(317, 37);
-            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmail.Location = new System.Drawing.Point(423, 49);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(129, 19);
+            this.lblEmail.Size = new System.Drawing.Size(174, 27);
             this.lblEmail.TabIndex = 5;
             this.lblEmail.Text = "پست الکترونیکی:";
             // 
             // btnLogin
             // 
             this.btnLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnLogin.Location = new System.Drawing.Point(197, 119);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLogin.Location = new System.Drawing.Point(263, 159);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(112, 34);
+            this.btnLogin.Size = new System.Drawing.Size(149, 45);
             this.btnLogin.TabIndex = 9;
             this.btnLogin.Text = "ورود";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -99,40 +102,40 @@ namespace GanjoorTranslationTagger
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(23, 37);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEmail.Location = new System.Drawing.Point(31, 49);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtEmail.Size = new System.Drawing.Size(286, 27);
+            this.txtEmail.Size = new System.Drawing.Size(380, 33);
             this.txtEmail.TabIndex = 6;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(23, 75);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.Location = new System.Drawing.Point(31, 100);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtPassword.Size = new System.Drawing.Size(286, 27);
+            this.txtPassword.Size = new System.Drawing.Size(380, 33);
             this.txtPassword.TabIndex = 8;
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(383, 78);
-            this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPassword.Location = new System.Drawing.Point(511, 104);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(63, 19);
+            this.lblPassword.Size = new System.Drawing.Size(83, 27);
             this.lblPassword.TabIndex = 7;
             this.lblPassword.Text = "گذرواژه:";
             // 
             // btnSelectCategory
             // 
             this.btnSelectCategory.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSelectCategory.Location = new System.Drawing.Point(31, 32);
-            this.btnSelectCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSelectCategory.Location = new System.Drawing.Point(41, 43);
+            this.btnSelectCategory.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnSelectCategory.Name = "btnSelectCategory";
-            this.btnSelectCategory.Size = new System.Drawing.Size(500, 36);
+            this.btnSelectCategory.Size = new System.Drawing.Size(667, 48);
             this.btnSelectCategory.TabIndex = 12;
             this.btnSelectCategory.Text = "انتخاب بخش";
             this.btnSelectCategory.UseVisualStyleBackColor = true;
@@ -141,9 +144,10 @@ namespace GanjoorTranslationTagger
             // lblSelectedCat
             // 
             this.lblSelectedCat.AutoSize = true;
-            this.lblSelectedCat.Location = new System.Drawing.Point(393, 80);
+            this.lblSelectedCat.Location = new System.Drawing.Point(524, 107);
+            this.lblSelectedCat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelectedCat.Name = "lblSelectedCat";
-            this.lblSelectedCat.Size = new System.Drawing.Size(131, 19);
+            this.lblSelectedCat.Size = new System.Drawing.Size(178, 27);
             this.lblSelectedCat.TabIndex = 13;
             this.lblSelectedCat.Text = "بخش انتخاب شده";
             // 
@@ -151,10 +155,12 @@ namespace GanjoorTranslationTagger
             // 
             this.grpCat.Controls.Add(this.btnSelectCategory);
             this.grpCat.Controls.Add(this.lblSelectedCat);
-            this.grpCat.Location = new System.Drawing.Point(546, 37);
+            this.grpCat.Location = new System.Drawing.Point(728, 49);
+            this.grpCat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpCat.Name = "grpCat";
+            this.grpCat.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpCat.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.grpCat.Size = new System.Drawing.Size(554, 113);
+            this.grpCat.Size = new System.Drawing.Size(739, 151);
             this.grpCat.TabIndex = 14;
             this.grpCat.TabStop = false;
             this.grpCat.Text = "بخش مد نظر از گنجور";
@@ -163,10 +169,12 @@ namespace GanjoorTranslationTagger
             // 
             this.grpLanguage.Controls.Add(this.btnLanguages);
             this.grpLanguage.Controls.Add(this.cmbLanguage);
-            this.grpLanguage.Location = new System.Drawing.Point(546, 156);
+            this.grpLanguage.Location = new System.Drawing.Point(728, 208);
+            this.grpLanguage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpLanguage.Name = "grpLanguage";
+            this.grpLanguage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpLanguage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.grpLanguage.Size = new System.Drawing.Size(554, 86);
+            this.grpLanguage.Size = new System.Drawing.Size(739, 115);
             this.grpLanguage.TabIndex = 15;
             this.grpLanguage.TabStop = false;
             this.grpLanguage.Text = "زبان یا نویسش";
@@ -174,10 +182,10 @@ namespace GanjoorTranslationTagger
             // btnLanguages
             // 
             this.btnLanguages.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnLanguages.Location = new System.Drawing.Point(19, 36);
-            this.btnLanguages.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLanguages.Location = new System.Drawing.Point(25, 48);
+            this.btnLanguages.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnLanguages.Name = "btnLanguages";
-            this.btnLanguages.Size = new System.Drawing.Size(112, 35);
+            this.btnLanguages.Size = new System.Drawing.Size(149, 47);
             this.btnLanguages.TabIndex = 17;
             this.btnLanguages.Text = "تعریف";
             this.btnLanguages.UseVisualStyleBackColor = true;
@@ -187,18 +195,19 @@ namespace GanjoorTranslationTagger
             // 
             this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
-            this.cmbLanguage.Location = new System.Drawing.Point(138, 37);
+            this.cmbLanguage.Location = new System.Drawing.Point(184, 49);
+            this.cmbLanguage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(393, 27);
+            this.cmbLanguage.Size = new System.Drawing.Size(523, 33);
             this.cmbLanguage.TabIndex = 16;
             // 
             // btnStartTranslating
             // 
             this.btnStartTranslating.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnStartTranslating.Location = new System.Drawing.Point(32, 263);
-            this.btnStartTranslating.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStartTranslating.Location = new System.Drawing.Point(43, 351);
+            this.btnStartTranslating.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnStartTranslating.Name = "btnStartTranslating";
-            this.btnStartTranslating.Size = new System.Drawing.Size(252, 35);
+            this.btnStartTranslating.Size = new System.Drawing.Size(336, 47);
             this.btnStartTranslating.TabIndex = 18;
             this.btnStartTranslating.Text = "شروع";
             this.btnStartTranslating.UseVisualStyleBackColor = true;
@@ -206,22 +215,36 @@ namespace GanjoorTranslationTagger
             // 
             // prgrss
             // 
-            this.prgrss.Location = new System.Drawing.Point(302, 263);
+            this.prgrss.Location = new System.Drawing.Point(403, 351);
+            this.prgrss.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.prgrss.Name = "prgrss";
-            this.prgrss.Size = new System.Drawing.Size(798, 35);
+            this.prgrss.Size = new System.Drawing.Size(1064, 47);
             this.prgrss.TabIndex = 19;
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnBackup.Location = new System.Drawing.Point(43, 422);
+            this.btnBackup.Margin = new System.Windows.Forms.Padding(5);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(336, 47);
+            this.btnBackup.TabIndex = 20;
+            this.btnBackup.Text = "پشتیبان‌گیری";
+            this.btnBackup.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1112, 325);
+            this.ClientSize = new System.Drawing.Size(1483, 505);
+            this.Controls.Add(this.btnBackup);
             this.Controls.Add(this.prgrss);
             this.Controls.Add(this.btnStartTranslating);
             this.Controls.Add(this.grpLanguage);
             this.Controls.Add(this.grpCat);
             this.Controls.Add(this.grpLogin);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
@@ -253,6 +276,7 @@ namespace GanjoorTranslationTagger
         private System.Windows.Forms.ComboBox cmbLanguage;
         private System.Windows.Forms.Button btnStartTranslating;
         private System.Windows.Forms.ProgressBar prgrss;
+        private System.Windows.Forms.Button btnBackup;
     }
 }
 
