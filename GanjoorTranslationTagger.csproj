@@ -60,6 +60,7 @@
     <Compile Include="ImportedViewModels\GanjoorVerseTranslationViewModel.cs" />
     <Compile Include="ImportedViewModels\GanjoorVerseViewModel.cs" />
     <Compile Include="ImportedViewModels\LoginViewModel.cs" />
+    <Compile Include="ImportedViewModels\PaginationMetadata.cs" />
     <Compile Include="ImportedViewModels\PublicRAppUser.cs" />
     <Compile Include="ImportedViewModels\RAppUserStatus.cs" />
     <Compile Include="ImportedViewModels\VersePosition.cs" />

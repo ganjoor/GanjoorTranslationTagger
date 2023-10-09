@@ -231,6 +231,7 @@ namespace GanjoorTranslationTagger
             this.btnBackup.TabIndex = 20;
             this.btnBackup.Text = "پشتیبان‌گیری";
             this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
             // MainForm
             // 

@@ -1,11 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using GanjoorTranslationTagger.ImportedViewModels;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RMuseum.Models.Ganjoor;
 using RMuseum.Models.Ganjoor.ViewModels;
 using RMuseum.Services.Implementation.ImportedFromDesktopGanjoor;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -215,6 +218,67 @@ namespace GanjoorTranslationTagger
             Cursor = Cursors.Default;
 
             MessageBox.Show("انجام شد.");
+        }
+
+        private async void btnBackup_Click(object sender, EventArgs e)
+        {
+            using(FolderBrowserDialog dlg = new FolderBrowserDialog())
+            {
+                if(dlg.ShowDialog() == DialogResult.OK)
+                {
+                    Cursor = Cursors.WaitCursor;
+                    Application.DoEvents();
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Properties.Settings.Default.MuseumToken);
+                        int pageNumber = 1;
+                        int totalCount = 1;
+                        
+                        do
+                        {
+                            var translationsUrl = $"https://api.ganjoor.net/api/translations/all/{(cmbLanguage.SelectedItem as GanjoorLanguage).Id}?PageNumber=${pageNumber}&PageSize=1000";
+                            var responseTranslatons = await httpClient.GetAsync(translationsUrl);
+                            if (responseTranslatons.StatusCode != HttpStatusCode.OK)
+                            {
+                                Cursor = Cursors.Default;
+                                Enabled = true;
+                                MessageBox.Show(await responseTranslatons.Content.ReadAsStringAsync());
+                                return;
+                            }
+                            responseTranslatons.EnsureSuccessStatusCode();
+                            var translations = JArray.Parse(await responseTranslatons.Content.ReadAsStringAsync()).ToObject<List<GanjoorPoemTranslationViewModel>>();
+                            if(translations.Count == 0)
+                            {
+                                break;
+                            }
+
+                            string paginationMetadataJsonValue = responseTranslatons.Headers.GetValues("paging-headers").FirstOrDefault();
+
+                            if(totalCount == 1)
+                            {
+                                if (!string.IsNullOrEmpty(paginationMetadataJsonValue))
+                                {
+                                    var meta = JsonConvert.DeserializeObject<PaginationMetadata>(paginationMetadataJsonValue);
+                                    totalCount = meta.totalCount;
+                                    prgrss.Value = 0;
+                                    prgrss.Maximum = totalCount;
+                                }
+                            }
+                            
+
+                            foreach (var translation in translations)
+                            {
+                                prgrss.Value++;
+                                Application.DoEvents();
+                            }
+
+                        }
+                        while (true);
+                                               
+                    }
+                    Cursor = Cursors.Default;
+                }
+            }
         }
     }
 }
