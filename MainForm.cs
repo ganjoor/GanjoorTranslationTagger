@@ -227,6 +227,13 @@ namespace GanjoorTranslationTagger
             {
                 if(dlg.ShowDialog() == DialogResult.OK)
                 {
+                    string dir = dlg.SelectedPath;
+                    string jsonDir = Path.Combine(dir, "json");
+                    if(!Directory.Exists(jsonDir))
+                    {
+                        Directory.CreateDirectory(jsonDir);
+                    }
+                   
                     Cursor = Cursors.WaitCursor;
                     Application.DoEvents();
                     using (HttpClient httpClient = new HttpClient())
@@ -286,9 +293,40 @@ namespace GanjoorTranslationTagger
                                 var json = await response.Content.ReadAsStringAsync();
                                 var translationCompleteViewModel = JsonConvert.DeserializeObject<GanjoorPoemTranslationViewModel>(json);
 
-                                File.WriteAllText(Path.Combine(dlg.SelectedPath, translationCompleteViewModel.PoemId.ToString() + ".json"), json);
+                                File.WriteAllText(Path.Combine(jsonDir, translationCompleteViewModel.PoemId.ToString() + ".json"), json);
 
-                                
+
+                                var responsePoem = await httpClient.GetAsync($"https://api.ganjoor.net/api/ganjoor/poem/{translationCompleteViewModel.PoemId}?verseDetails=true&catInfo=true&rhymes=false&recitations=false&images=false&songs=false&comments=false&navigation=true");
+                                if (!responsePoem.IsSuccessStatusCode)
+                                {
+                                    Cursor = Cursors.Default;
+                                    Enabled = true;
+                                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                                    return;
+                                }
+
+                                responsePoem.EnsureSuccessStatusCode();
+
+                                var poemWithVerses = JsonConvert.DeserializeObject<GanjoorPoemCompleteViewModel>(await responsePoem.Content.ReadAsStringAsync());
+
+                                string catDir = dir;
+                                foreach(var cat in poemWithVerses.Category.Cat.Ancestors)
+                                {
+                                    catDir = Path.Combine(catDir, cat.Title);
+                                    if(!Directory.Exists(catDir))
+                                    {
+                                        Directory.CreateDirectory(catDir);
+                                    }
+                                }
+
+                                List<string> list = new List<string>();
+                                foreach(var v in translationCompleteViewModel.TranslatedVerses)
+                                {
+                                    list.Add(v.Verse.Text);
+                                    list.Add(v.TText);
+                                }
+
+                                File.WriteAllLines(Path.Combine(catDir, poemWithVerses.Title + ".txt"), list.ToArray());
 
                             }
 
