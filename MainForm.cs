@@ -245,7 +245,7 @@ namespace GanjoorTranslationTagger
                         
                         do
                         {
-                            var translationsUrl = $"https://api.ganjoor.net/api/translations/all/{(cmbLanguage.SelectedItem as GanjoorLanguage).Id}?PageNumber=${pageNumber}&PageSize=1000";
+                            var translationsUrl = $"https://api.ganjoor.net/api/translations/all/{(cmbLanguage.SelectedItem as GanjoorLanguage).Id}?PageNumber={pageNumber}&PageSize=1000";
                             var responseTranslations = await httpClient.GetAsync(translationsUrl);
                             if (responseTranslations.StatusCode != HttpStatusCode.OK)
                             {
@@ -317,6 +317,12 @@ namespace GanjoorTranslationTagger
                                     {
                                         Directory.CreateDirectory(catDir);
                                     }
+                                }
+
+                                catDir = Path.Combine(catDir, poemWithVerses.Category.Cat.Title);
+                                if(!Directory.Exists(catDir))
+                                {
+                                    Directory.CreateDirectory(catDir);
                                 }
 
                                 List<string> list = new List<string>();
