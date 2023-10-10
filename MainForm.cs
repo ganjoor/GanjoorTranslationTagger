@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -233,26 +234,27 @@ namespace GanjoorTranslationTagger
                         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Properties.Settings.Default.MuseumToken);
                         int pageNumber = 1;
                         int totalCount = 1;
+                        Enabled = false;
                         
                         do
                         {
                             var translationsUrl = $"https://api.ganjoor.net/api/translations/all/{(cmbLanguage.SelectedItem as GanjoorLanguage).Id}?PageNumber=${pageNumber}&PageSize=1000";
-                            var responseTranslatons = await httpClient.GetAsync(translationsUrl);
-                            if (responseTranslatons.StatusCode != HttpStatusCode.OK)
+                            var responseTranslations = await httpClient.GetAsync(translationsUrl);
+                            if (responseTranslations.StatusCode != HttpStatusCode.OK)
                             {
                                 Cursor = Cursors.Default;
                                 Enabled = true;
-                                MessageBox.Show(await responseTranslatons.Content.ReadAsStringAsync());
+                                MessageBox.Show(await responseTranslations.Content.ReadAsStringAsync());
                                 return;
                             }
-                            responseTranslatons.EnsureSuccessStatusCode();
-                            var translations = JArray.Parse(await responseTranslatons.Content.ReadAsStringAsync()).ToObject<List<GanjoorPoemTranslationViewModel>>();
+                            responseTranslations.EnsureSuccessStatusCode();
+                            var translations = JArray.Parse(await responseTranslations.Content.ReadAsStringAsync()).ToObject<List<GanjoorPoemTranslationViewModel>>();
                             if(translations.Count == 0)
                             {
                                 break;
                             }
 
-                            string paginationMetadataJsonValue = responseTranslatons.Headers.GetValues("paging-headers").FirstOrDefault();
+                            string paginationMetadataJsonValue = responseTranslations.Headers.GetValues("paging-headers").FirstOrDefault();
 
                             if(totalCount == 1)
                             {
@@ -270,13 +272,35 @@ namespace GanjoorTranslationTagger
                             {
                                 prgrss.Value++;
                                 Application.DoEvents();
+
+                                var translationUrl = $"https://api.ganjoor.net/api/translations/{translation.Id}";
+                                var response = await httpClient.GetAsync(translationUrl);
+                                if (response.StatusCode != HttpStatusCode.OK)
+                                {
+                                    Cursor = Cursors.Default;
+                                    Enabled = true;
+                                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                                    return;
+                                }
+                                response.EnsureSuccessStatusCode();
+                                var json = await response.Content.ReadAsStringAsync();
+                                var translationCompleteViewModel = JsonConvert.DeserializeObject<GanjoorPoemTranslationViewModel>(json);
+
+                                File.WriteAllText(Path.Combine(dlg.SelectedPath, translationCompleteViewModel.PoemId.ToString() + ".json"), json);
+
+                                
+
                             }
+
+                            pageNumber++;
 
                         }
                         while (true);
                                                
                     }
                     Cursor = Cursors.Default;
+                    Enabled = true;
+                    MessageBox.Show("انجام شد.");
                 }
             }
         }
